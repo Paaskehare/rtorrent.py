@@ -80,8 +80,12 @@
 
 import re
 import socket
-import urllib
-import xmlrpclib
+try:
+  import urllib
+  import xmlrpclib
+except ImportError:
+  import urllib.parse as urllib
+  import xmlrpc.client as xmlrpclib
 
 
 class SCGITransport(xmlrpclib.Transport):
@@ -128,7 +132,7 @@ class SCGITransport(xmlrpclib.Transport):
                                                   maxsplit=1)
         
         if self.verbose:
-            print 'body:', repr(response_body)
+            print('body:', repr(response_body))
         
         p.feed(response_body)
         p.close()

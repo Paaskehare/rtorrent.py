@@ -1,7 +1,11 @@
-import xmlrpclib
 import shutil
 import os.path
 from rtorrent_xmlrpc import SCGIServerProxy
+
+try:
+  import xmlrpclib
+except ImportError:
+  import xmlrpc.client as xmlrpclib
 
 class Torrent(object):
     def __init__(self, server, ident):
